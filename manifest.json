@@ -1,0 +1,17 @@
+{
+  "background_color": "#ffffff",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "Time coach",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "Time coach",
+  "start_url": "/",
+  "theme_color": "#ffffff",
+  "id": "Time coach",
+  "description": "SV GROUP Time coach - Daily Routine Reminder",
+  "lang": "hi",
+  "categories": [
+    "productivity"
+  ]
+}
