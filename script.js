@@ -1,13 +1,11 @@
 /* =========================================
    TIME COACH
    SV GROUP
-   FINAL VERSION
+   ANDROID APP READY
 ========================================= */
 
 
-/* =========================================
-   DATA
-========================================= */
+/* DATA */
 
 let routines = JSON.parse(
   localStorage.getItem("timeCoachRoutines") || "[]"
@@ -16,31 +14,26 @@ let routines = JSON.parse(
 let personName =
   localStorage.getItem("timeCoachPerson") || "";
 
-let lastCheckedMinute = "";
+let lastReminderMinute = "";
 
-let spokenToday = {};
-
-try {
-  spokenToday = JSON.parse(
-    localStorage.getItem("timeCoachSpokenToday") || "{}"
-  );
-} catch (error) {
-  spokenToday = {};
-}
+let spokenToday = JSON.parse(
+  localStorage.getItem("timeCoachSpokenToday") || "{}"
+);
 
 
-/* =========================================
-   ELEMENTS
-========================================= */
+/* ELEMENTS */
 
-const personInput =
+const personNameInput =
   document.getElementById("personName");
 
-const taskInput =
+const taskNameInput =
   document.getElementById("taskName");
 
-const timeInput =
+const taskTimeInput =
   document.getElementById("taskTime");
+
+const personMessage =
+  document.getElementById("personMessage");
 
 const routineList =
   document.getElementById("routineList");
@@ -48,42 +41,35 @@ const routineList =
 const nextTask =
   document.getElementById("nextTask");
 
-const personMessage =
-  document.getElementById("personMessage");
-
 const currentTime =
   document.getElementById("currentTime");
 
-const statusText =
-  document.getElementById("statusText");
+
+/* LOAD */
+
+personNameInput.value = personName;
+
+renderRoutines();
+
+updateNextTask();
+
+updateClock();
 
 
-/* =========================================
-   LOAD PERSON
-========================================= */
+/* SAVE PERSON */
 
-function loadPerson() {
+document
+  .getElementById("savePersonBtn")
+  .addEventListener("click", savePerson);
 
-  if (personInput) {
-    personInput.value = personName;
-  }
-
-}
-
-
-/* =========================================
-   SAVE PERSON
-========================================= */
 
 function savePerson() {
 
   const name =
-    personInput.value.trim();
+    personNameInput.value.trim();
 
   if (!name) {
-
     alert("पहले नाम लिखें");
-
     return;
   }
 
@@ -95,76 +81,82 @@ function savePerson() {
   );
 
   personMessage.textContent =
-    "✅ " + personName + " का नाम Save हो गया";
+    "✅ " + personName + " Save हो गया";
 
   speak(
-    "नाम save हो गया"
+    personName + " जी, नाम save हो गया है।"
   );
-
 }
 
 
-/* =========================================
-   ADD ROUTINE
-========================================= */
+/* ADD ROUTINE */
+
+document
+  .getElementById("addRoutineBtn")
+  .addEventListener("click", addRoutine);
+
 
 function addRoutine() {
 
   const task =
-    taskInput.value.trim();
+    taskNameInput.value.trim();
 
   const time =
-    timeInput.value;
+    taskTimeInput.value;
 
   if (!task) {
-
     alert("Task का नाम लिखें");
-
     return;
   }
 
   if (!time) {
-
     alert("समय चुनें");
-
     return;
   }
 
-  const newRoutine = {
 
-    id:
-      Date.now(),
+  const routine = {
 
-    task:
-      task,
+    id: Date.now(),
 
-    time:
-      time
+    task: task,
+
+    time: time
 
   };
 
-  routines.push(newRoutine);
+
+  routines.push(routine);
+
 
   routines.sort(
-    (a, b) =>
-      a.time.localeCompare(b.time)
+    function(a, b) {
+
+      return a.time.localeCompare(
+        b.time
+      );
+
+    }
   );
+
 
   saveRoutines();
 
-  taskInput.value = "";
-  timeInput.value = "";
+  taskNameInput.value = "";
+
+  taskTimeInput.value = "";
 
   renderRoutines();
 
-  updateNextRoutine();
+  updateNextTask();
 
+  speak(
+    "Routine save हो गया है।"
+  );
 }
 
 
-/* =========================================
-   SAVE ROUTINES
-========================================= */
+/* SAVE */
 
 function saveRoutines() {
 
@@ -172,38 +164,12 @@ function saveRoutines() {
     "timeCoachRoutines",
     JSON.stringify(routines)
   );
-
 }
 
 
-/* =========================================
-   DELETE ROUTINE
-========================================= */
-
-function deleteRoutine(id) {
-
-  routines =
-    routines.filter(
-      routine =>
-        routine.id !== id
-    );
-
-  saveRoutines();
-
-  renderRoutines();
-
-  updateNextRoutine();
-
-}
-
-
-/* =========================================
-   DISPLAY ROUTINES
-========================================= */
+/* DISPLAY */
 
 function renderRoutines() {
-
-  if (!routineList) return;
 
   if (routines.length === 0) {
 
@@ -213,14 +179,15 @@ function renderRoutines() {
     return;
   }
 
+
   routineList.innerHTML =
     routines
-      .map(routine => {
+      .map(function(routine) {
 
         return `
           <div class="routine">
 
-            <div class="routine-top">
+            <div class="routine-row">
 
               <div class="routine-name">
                 ${escapeHTML(routine.task)}
@@ -244,17 +211,34 @@ function renderRoutines() {
 
       })
       .join("");
-
 }
 
 
-/* =========================================
-   NEXT ROUTINE
-========================================= */
+/* DELETE */
 
-function updateNextRoutine() {
+function deleteRoutine(id) {
 
-  if (!nextTask) return;
+  routines =
+    routines.filter(
+      function(routine) {
+
+        return routine.id !== id;
+
+      }
+    );
+
+
+  saveRoutines();
+
+  renderRoutines();
+
+  updateNextTask();
+}
+
+
+/* NEXT TASK */
+
+function updateNextTask() {
 
   if (routines.length === 0) {
 
@@ -264,6 +248,7 @@ function updateNextRoutine() {
     return;
   }
 
+
   const now =
     new Date();
 
@@ -271,25 +256,34 @@ function updateNextRoutine() {
     now.getHours() * 60 +
     now.getMinutes();
 
+
   let next = null;
 
-  for (const routine of routines) {
+
+  for (
+    let i = 0;
+    i < routines.length;
+    i++
+  ) {
 
     const parts =
-      routine.time.split(":");
+      routines[i].time.split(":");
 
     const minutes =
       Number(parts[0]) * 60 +
       Number(parts[1]);
 
-    if (minutes >= currentMinutes) {
 
-      next = routine;
+    if (
+      minutes >= currentMinutes
+    ) {
+
+      next = routines[i];
 
       break;
     }
-
   }
+
 
   if (!next) {
 
@@ -299,17 +293,15 @@ function updateNextRoutine() {
     return;
   }
 
+
   nextTask.textContent =
     formatTime(next.time) +
     " — " +
     next.task;
-
 }
 
 
-/* =========================================
-   VOICE
-========================================= */
+/* VOICE */
 
 function speak(message) {
 
@@ -317,87 +309,108 @@ function speak(message) {
     !("speechSynthesis" in window)
   ) {
 
+    alert(
+      "इस device में voice support नहीं मिला।"
+    );
+
     return;
   }
 
-  try {
 
-    window.speechSynthesis.cancel();
+  window.speechSynthesis.cancel();
 
-    const speech =
-      new SpeechSynthesisUtterance(
-        message
-      );
 
-    speech.lang = "hi-IN";
-
-    speech.rate = 0.85;
-
-    speech.pitch = 1;
-
-    speech.volume = 1;
-
-    window.speechSynthesis.speak(
-      speech
+  const voice =
+    new SpeechSynthesisUtterance(
+      message
     );
 
-  } catch (error) {
 
-    console.log(
-      "Voice error:",
-      error
-    );
+  voice.lang = "hi-IN";
 
-  }
+  voice.rate = 0.85;
 
+  voice.pitch = 1;
+
+  voice.volume = 1;
+
+
+  window.speechSynthesis.speak(
+    voice
+  );
 }
 
 
-/* =========================================
-   ROUTINE REMINDER
-========================================= */
+/* VOICE TEST */
 
-function checkRoutineReminder() {
+document
+  .getElementById("testVoiceBtn")
+  .addEventListener(
+    "click",
+    function() {
+
+      const name =
+        personName || "आप";
+
+      speak(
+        name +
+        " जी, Time Coach की voice test है।"
+      );
+
+    }
+  );
+
+
+/* REMINDER */
+
+function checkReminder() {
 
   const now =
     new Date();
+
 
   const hour =
     String(
       now.getHours()
     ).padStart(2, "0");
 
+
   const minute =
     String(
       now.getMinutes()
     ).padStart(2, "0");
 
+
   const current =
     hour + ":" + minute;
 
-  const date =
-    now.toISOString()
-      .slice(0, 10);
 
+  const today =
+    now.getFullYear() +
+    "-" +
+    String(
+      now.getMonth() + 1
+    ).padStart(2, "0") +
+    "-" +
+    String(
+      now.getDate()
+    ).padStart(2, "0");
 
-  /*
-    Same minute ko baar-baar
-    speak hone se rokna
-  */
 
   if (
-    current === lastCheckedMinute
+    current === lastReminderMinute
   ) {
 
     return;
   }
 
-  lastCheckedMinute =
+
+  lastReminderMinute =
     current;
 
 
   routines.forEach(
-    routine => {
+    function(routine) {
 
       if (
         routine.time !== current
@@ -406,16 +419,12 @@ function checkRoutineReminder() {
         return;
       }
 
+
       const key =
         routine.id +
         "_" +
-        date;
+        today;
 
-
-      /*
-        Aaj is routine ka
-        reminder already diya?
-      */
 
       if (
         spokenToday[key]
@@ -424,7 +433,9 @@ function checkRoutineReminder() {
         return;
       }
 
+
       spokenToday[key] = true;
+
 
       localStorage.setItem(
         "timeCoachSpokenToday",
@@ -435,143 +446,45 @@ function checkRoutineReminder() {
 
 
       const name =
-        personName ||
-        "Aap";
+        personName || "आप";
 
 
       const message =
         name +
-        " ji, " +
-        formatTime(routine.time) +
-        " par " +
+        " जी, " +
         routine.task +
-        " ka time ho gaya hai.";
+        " का time हो गया है।";
 
 
       speak(message);
 
-      showNotification(
-        routine.task,
-        message
-      );
-
     }
   );
-
 }
 
 
-/* =========================================
-   NOTIFICATION
-========================================= */
+/* CLOCK */
 
-async function enableNotifications() {
+function updateClock() {
 
-  if (
-    !("Notification" in window)
-  ) {
-
-    alert(
-      "Is phone/browser mein notification support nahi mila."
-    );
-
-    return;
-  }
+  const now =
+    new Date();
 
 
-  const permission =
-    await Notification.requestPermission();
-
-
-  if (
-    permission === "granted"
-  ) {
-
-    alert(
-      "✅ Notification ON ho gaya"
-    );
-
-  } else {
-
-    alert(
-      "Notification permission nahi mili."
-    );
-
-  }
-
-}
-
-
-/* =========================================
-   SHOW NOTIFICATION
-========================================= */
-
-function showNotification(
-  task,
-  message
-) {
-
-  if (
-    !("Notification" in window)
-  ) {
-
-    return;
-  }
-
-  if (
-    Notification.permission !==
-    "granted"
-  ) {
-
-    return;
-  }
-
-  try {
-
-    new Notification(
-      "⏱️ Time Coach",
+  currentTime.textContent =
+    now.toLocaleTimeString(
+      "en-IN",
       {
-        body: message,
-        icon: "icon.png",
-        tag:
-          "time-coach-" +
-          task
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: true
       }
     );
-
-  } catch (error) {
-
-    console.log(
-      "Notification error:",
-      error
-    );
-
-  }
-
 }
 
 
-/* =========================================
-   TEST VOICE
-========================================= */
-
-function testVoice() {
-
-  const name =
-    personName ||
-    "Aap";
-
-  speak(
-    name +
-    " ji, ye Time Coach ki voice test hai."
-  );
-
-}
-
-
-/* =========================================
-   FORMAT TIME
-========================================= */
+/* FORMAT TIME */
 
 function formatTime(time) {
 
@@ -584,17 +497,21 @@ function formatTime(time) {
   const minute =
     parts[1];
 
+
   const ampm =
     hour >= 12
       ? "PM"
       : "AM";
 
+
   hour =
     hour % 12;
+
 
   if (hour === 0) {
     hour = 12;
   }
+
 
   return (
     hour +
@@ -603,79 +520,10 @@ function formatTime(time) {
     " " +
     ampm
   );
-
 }
 
 
-/* =========================================
-   CURRENT CLOCK
-========================================= */
-
-function updateClock() {
-
-  const now =
-    new Date();
-
-  currentTime.textContent =
-    now.toLocaleTimeString(
-      "en-IN",
-      {
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: true
-      }
-    );
-
-}
-
-
-/* =========================================
-   CLEAN OLD REMINDERS
-========================================= */
-
-function cleanOldReminderData() {
-
-  const today =
-    new Date()
-      .toISOString()
-      .slice(0, 10);
-
-  const cleaned = {};
-
-  Object.keys(
-    spokenToday
-  ).forEach(key => {
-
-    if (
-      key.endsWith(
-        "_" + today
-      )
-    ) {
-
-      cleaned[key] =
-        spokenToday[key];
-
-    }
-
-  });
-
-  spokenToday =
-    cleaned;
-
-  localStorage.setItem(
-    "timeCoachSpokenToday",
-    JSON.stringify(
-      spokenToday
-    )
-  );
-
-}
-
-
-/* =========================================
-   ESCAPE HTML
-========================================= */
+/* SECURITY */
 
 function escapeHTML(text) {
 
@@ -686,134 +534,89 @@ function escapeHTML(text) {
     text;
 
   return div.innerHTML;
-
 }
 
 
-/* =========================================
-   BUTTON EVENTS
-========================================= */
+/* OLD REMINDER CLEANUP */
 
-document
-  .getElementById(
-    "savePersonBtn"
-  )
-  .addEventListener(
-    "click",
-    savePerson
-  );
+function cleanupReminderData() {
 
+  const today =
+    new Date();
 
-document
-  .getElementById(
-    "addRoutineBtn"
-  )
-  .addEventListener(
-    "click",
-    addRoutine
-  );
+  const todayKey =
+    today.getFullYear() +
+    "-" +
+    String(
+      today.getMonth() + 1
+    ).padStart(2, "0") +
+    "-" +
+    String(
+      today.getDate()
+    ).padStart(2, "0");
 
 
-document
-  .getElementById(
-    "notificationBtn"
-  )
-  .addEventListener(
-    "click",
-    enableNotifications
-  );
+  const clean = {};
 
 
-document
-  .getElementById(
-    "testVoiceBtn"
-  )
-  .addEventListener(
-    "click",
-    testVoice
-  );
+  Object.keys(
+    spokenToday
+  ).forEach(
+    function(key) {
 
-
-/* =========================================
-   SERVICE WORKER
-========================================= */
-
-if (
-  "serviceWorker" in navigator
-) {
-
-  window.addEventListener(
-    "load",
-    function () {
-
-      navigator.serviceWorker
-        .register("sw.js")
-        .then(
-          registration => {
-
-            console.log(
-              "Service Worker registered",
-              registration
-            );
-
-          }
+      if (
+        key.endsWith(
+          "_" + todayKey
         )
-        .catch(
-          error => {
+      ) {
 
-            console.log(
-              "Service Worker error:",
-              error
-            );
+        clean[key] =
+          spokenToday[key];
 
-          }
-        );
+      }
 
     }
   );
 
+
+  spokenToday =
+    clean;
+
+
+  localStorage.setItem(
+    "timeCoachSpokenToday",
+    JSON.stringify(
+      spokenToday
+    )
+  );
 }
 
 
-/* =========================================
-   START
-========================================= */
+/* START */
 
-loadPerson();
-
-renderRoutines();
-
-updateNextRoutine();
-
-updateClock();
-
-cleanOldReminderData();
+cleanupReminderData();
 
 
-/* =========================================
-   RUN EVERY SECOND
-========================================= */
+/* CHECK EVERY SECOND */
 
 setInterval(
-  function () {
+  function() {
 
     updateClock();
 
-    checkRoutineReminder();
+    checkReminder();
 
   },
   1000
 );
 
 
-/* =========================================
-   UPDATE NEXT TASK EVERY MINUTE
-========================================= */
+/* UPDATE NEXT TASK */
 
 setInterval(
-  function () {
+  function() {
 
-    updateNextRoutine();
+    updateNextTask();
 
   },
   60000
