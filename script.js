@@ -1,11 +1,13 @@
 /* =========================================
    TIME COACH
    SV GROUP
-   ANDROID APP READY
+   DAILY ROUTINE + VOICE REMINDER
 ========================================= */
 
 
-/* DATA */
+/* =========================
+   DATA
+========================= */
 
 let routines = JSON.parse(
   localStorage.getItem("timeCoachRoutines") || "[]"
@@ -21,7 +23,9 @@ let spokenToday = JSON.parse(
 );
 
 
-/* ELEMENTS */
+/* =========================
+   ELEMENTS
+========================= */
 
 const personNameInput =
   document.getElementById("personName");
@@ -35,6 +39,9 @@ const taskTimeInput =
 const personMessage =
   document.getElementById("personMessage");
 
+const savedPerson =
+  document.getElementById("savedPerson");
+
 const routineList =
   document.getElementById("routineList");
 
@@ -44,23 +51,46 @@ const nextTask =
 const currentTime =
   document.getElementById("currentTime");
 
+const savePersonBtn =
+  document.getElementById("savePersonBtn");
 
-/* LOAD */
+const addRoutineBtn =
+  document.getElementById("addRoutineBtn");
 
-personNameInput.value = personName;
+const testVoiceBtn =
+  document.getElementById("testVoiceBtn");
+
+
+/* =========================
+   LOAD DATA
+========================= */
+
+if (personNameInput) {
+  personNameInput.value = personName;
+}
+
+if (personName && savedPerson) {
+  savedPerson.textContent =
+    "👋 Hello, " + personName;
+}
 
 renderRoutines();
-
 updateNextTask();
-
 updateClock();
 
 
-/* SAVE PERSON */
+/* =========================
+   SAVE PERSON
+========================= */
 
-document
-  .getElementById("savePersonBtn")
-  .addEventListener("click", savePerson);
+if (savePersonBtn) {
+
+  savePersonBtn.addEventListener(
+    "click",
+    savePerson
+  );
+
+}
 
 
 function savePerson() {
@@ -69,31 +99,66 @@ function savePerson() {
     personNameInput.value.trim();
 
   if (!name) {
+
     alert("पहले नाम लिखें");
+
     return;
   }
 
+
   personName = name;
+
 
   localStorage.setItem(
     "timeCoachPerson",
     personName
   );
 
-  personMessage.textContent =
-    "✅ " + personName + " Save हो गया";
+
+  if (personMessage) {
+
+    personMessage.textContent =
+      "✅ " + personName + " Save हो गया";
+
+    personMessage.style.color =
+      "#d4af37";
+
+    personMessage.style.textAlign =
+      "center";
+
+    personMessage.style.marginTop =
+      "10px";
+
+  }
+
+
+  if (savedPerson) {
+
+    savedPerson.textContent =
+      "👋 Hello, " + personName;
+
+  }
+
 
   speak(
-    personName + " जी, नाम save हो गया है।"
+    personName +
+    " जी, नाम save हो गया है।"
   );
 }
 
 
-/* ADD ROUTINE */
+/* =========================
+   ADD ROUTINE
+========================= */
 
-document
-  .getElementById("addRoutineBtn")
-  .addEventListener("click", addRoutine);
+if (addRoutineBtn) {
+
+  addRoutineBtn.addEventListener(
+    "click",
+    addRoutine
+  );
+
+}
 
 
 function addRoutine() {
@@ -104,13 +169,19 @@ function addRoutine() {
   const time =
     taskTimeInput.value;
 
+
   if (!task) {
+
     alert("Task का नाम लिखें");
+
     return;
   }
 
+
   if (!time) {
+
     alert("समय चुनें");
+
     return;
   }
 
@@ -142,13 +213,16 @@ function addRoutine() {
 
   saveRoutines();
 
+
   taskNameInput.value = "";
 
   taskTimeInput.value = "";
 
+
   renderRoutines();
 
   updateNextTask();
+
 
   speak(
     "Routine save हो गया है।"
@@ -156,7 +230,9 @@ function addRoutine() {
 }
 
 
-/* SAVE */
+/* =========================
+   SAVE ROUTINES
+========================= */
 
 function saveRoutines() {
 
@@ -164,17 +240,25 @@ function saveRoutines() {
     "timeCoachRoutines",
     JSON.stringify(routines)
   );
+
 }
 
 
-/* DISPLAY */
+/* =========================
+   DISPLAY ROUTINES
+========================= */
 
 function renderRoutines() {
+
+  if (!routineList) {
+    return;
+  }
+
 
   if (routines.length === 0) {
 
     routineList.innerHTML =
-      '<div class="empty">अभी कोई routine नहीं है</div>';
+      '<div class="empty" style="color:#888;text-align:center;padding:15px;">अभी कोई routine नहीं है</div>';
 
     return;
   }
@@ -185,19 +269,15 @@ function renderRoutines() {
       .map(function(routine) {
 
         return `
-          <div class="routine">
+          <div class="routine-item">
 
-            <div class="routine-row">
+            <h3>
+              ${escapeHTML(routine.task)}
+            </h3>
 
-              <div class="routine-name">
-                ${escapeHTML(routine.task)}
-              </div>
-
-              <div class="routine-time">
-                ${formatTime(routine.time)}
-              </div>
-
-            </div>
+            <p>
+              ⏰ ${formatTime(routine.time)}
+            </p>
 
             <button
               class="delete-btn"
@@ -214,9 +294,20 @@ function renderRoutines() {
 }
 
 
-/* DELETE */
+/* =========================
+   DELETE ROUTINE
+========================= */
 
 function deleteRoutine(id) {
+
+  const confirmDelete =
+    confirm("क्या यह routine delete करना है?");
+
+
+  if (!confirmDelete) {
+    return;
+  }
+
 
   routines =
     routines.filter(
@@ -236,9 +327,16 @@ function deleteRoutine(id) {
 }
 
 
-/* NEXT TASK */
+/* =========================
+   NEXT TASK
+========================= */
 
 function updateNextTask() {
+
+  if (!nextTask) {
+    return;
+  }
+
 
   if (routines.length === 0) {
 
@@ -251,6 +349,7 @@ function updateNextTask() {
 
   const now =
     new Date();
+
 
   const currentMinutes =
     now.getHours() * 60 +
@@ -268,6 +367,7 @@ function updateNextTask() {
 
     const parts =
       routines[i].time.split(":");
+
 
     const minutes =
       Number(parts[0]) * 60 +
@@ -301,7 +401,9 @@ function updateNextTask() {
 }
 
 
-/* VOICE */
+/* =========================
+   VOICE
+========================= */
 
 function speak(message) {
 
@@ -310,7 +412,7 @@ function speak(message) {
   ) {
 
     alert(
-      "इस device में voice support नहीं मिला।"
+      "इस phone में voice support नहीं मिला।"
     );
 
     return;
@@ -341,16 +443,19 @@ function speak(message) {
 }
 
 
-/* VOICE TEST */
+/* =========================
+   VOICE TEST
+========================= */
 
-document
-  .getElementById("testVoiceBtn")
-  .addEventListener(
+if (testVoiceBtn) {
+
+  testVoiceBtn.addEventListener(
     "click",
     function() {
 
       const name =
         personName || "आप";
+
 
       speak(
         name +
@@ -360,8 +465,12 @@ document
     }
   );
 
+}
 
-/* REMINDER */
+
+/* =========================
+   REMINDER
+========================= */
 
 function checkReminder() {
 
@@ -463,9 +572,16 @@ function checkReminder() {
 }
 
 
-/* CLOCK */
+/* =========================
+   CLOCK
+========================= */
 
 function updateClock() {
+
+  if (!currentTime) {
+    return;
+  }
+
 
   const now =
     new Date();
@@ -484,15 +600,19 @@ function updateClock() {
 }
 
 
-/* FORMAT TIME */
+/* =========================
+   FORMAT TIME
+========================= */
 
 function formatTime(time) {
 
   const parts =
     time.split(":");
 
+
   let hour =
     Number(parts[0]);
+
 
   const minute =
     parts[1];
@@ -523,26 +643,33 @@ function formatTime(time) {
 }
 
 
-/* SECURITY */
+/* =========================
+   SECURITY
+========================= */
 
 function escapeHTML(text) {
 
   const div =
     document.createElement("div");
 
+
   div.textContent =
     text;
+
 
   return div.innerHTML;
 }
 
 
-/* OLD REMINDER CLEANUP */
+/* =========================
+   OLD REMINDER CLEANUP
+========================= */
 
 function cleanupReminderData() {
 
   const today =
     new Date();
+
 
   const todayKey =
     today.getFullYear() +
@@ -592,12 +719,17 @@ function cleanupReminderData() {
 }
 
 
-/* START */
+/* =========================
+   START
+========================= */
 
 cleanupReminderData();
 
 
-/* CHECK EVERY SECOND */
+/* =========================
+   CLOCK + REMINDER
+   EVERY SECOND
+========================= */
 
 setInterval(
   function() {
@@ -611,7 +743,10 @@ setInterval(
 );
 
 
-/* UPDATE NEXT TASK */
+/* =========================
+   NEXT TASK UPDATE
+   EVERY MINUTE
+========================= */
 
 setInterval(
   function() {
@@ -621,3 +756,11 @@ setInterval(
   },
   60000
 );
+
+
+/* =========================
+   MAKE DELETE AVAILABLE
+========================= */
+
+window.deleteRoutine =
+  deleteRoutine;
