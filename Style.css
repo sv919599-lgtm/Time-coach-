@@ -16,45 +16,40 @@ body {
   min-height: 100vh;
 }
 
-/* Main App */
 .app {
   width: 100%;
   max-width: 520px;
   margin: auto;
-  min-height: 100vh;
   padding: 18px;
 }
 
 /* Header */
 header {
-  background: linear-gradient(145deg, #111111, #050505);
-  border: 1px solid #d4af37;
-  border-radius: 18px;
-  padding: 22px 18px;
   text-align: center;
-  margin-bottom: 18px;
-  box-shadow: 0 0 18px rgba(212, 175, 55, 0.18);
+  padding: 22px 10px;
+  border-bottom: 1px solid #d4af37;
+  margin-bottom: 20px;
 }
 
 header h1 {
   color: #d4af37;
-  font-size: 28px;
+  font-size: 30px;
   margin-bottom: 6px;
 }
 
 header p {
-  color: #aaaaaa;
+  color: #aaa;
   font-size: 14px;
 }
 
 /* Cards */
 .card {
-  background: #111111;
-  border: 1px solid #333333;
-  border-radius: 16px;
+  background: #101010;
+  border: 1px solid #333;
+  border-radius: 14px;
   padding: 18px;
   margin-bottom: 16px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
 }
 
 .card h2 {
@@ -66,162 +61,119 @@ header p {
 /* Labels */
 label {
   display: block;
-  color: #d4af37;
+  color: #ccc;
   font-size: 14px;
-  margin-bottom: 7px;
-  font-weight: bold;
+  margin-bottom: 6px;
 }
 
 /* Inputs */
 input,
 select {
   width: 100%;
-  padding: 13px 14px;
+  padding: 13px;
   background: #050505;
-  color: #ffffff;
-  border: 1px solid #444444;
-  border-radius: 10px;
+  color: #fff;
+  border: 1px solid #555;
+  border-radius: 9px;
   outline: none;
-  font-size: 15px;
   margin-bottom: 12px;
+  font-size: 15px;
 }
 
 input:focus,
 select:focus {
   border-color: #d4af37;
-  box-shadow: 0 0 8px rgba(212, 175, 55, 0.25);
 }
 
 /* Buttons */
 button {
   width: 100%;
-  padding: 13px 16px;
+  padding: 13px;
   border: none;
-  border-radius: 10px;
+  border-radius: 9px;
   background: #d4af37;
-  color: #050505;
+  color: #000;
   font-size: 15px;
   font-weight: bold;
   cursor: pointer;
   margin-top: 6px;
-  transition: 0.2s;
-}
-
-button:hover {
-  background: #f0d264;
 }
 
 button:active {
   transform: scale(0.98);
 }
 
-/* Secondary Button */
-.secondary-btn {
-  background: #222222;
-  color: #d4af37;
-  border: 1px solid #d4af37;
-}
-
-.secondary-btn:hover {
-  background: #2d2d2d;
-}
-
-/* Next Task */
-#nextTask {
-  color: #ffffff;
-  font-size: 18px;
-  font-weight: bold;
-  text-align: center;
-  padding: 16px;
-  background: #080808;
-  border: 1px solid #d4af37;
-  border-radius: 12px;
-}
-
-/* Saved Person */
-#savedPerson {
-  color: #d4af37;
-  text-align: center;
-  font-weight: bold;
-  margin-top: 10px;
-}
-
-/* Routine List */
-#routineList {
-  margin-top: 10px;
-}
-
+/* Routine item */
 .routine-item {
   background: #080808;
-  border: 1px solid #333333;
+  border: 1px solid #333;
   border-left: 4px solid #d4af37;
-  border-radius: 12px;
+  border-radius: 10px;
   padding: 14px;
-  margin-bottom: 10px;
-}
-
-.routine-item h3 {
-  color: #d4af37;
-  font-size: 17px;
-  margin-bottom: 6px;
-}
-
-.routine-item p {
-  color: #cccccc;
-  font-size: 14px;
-  margin-bottom: 4px;
-}
-
-/* Delete Button */
-.delete-btn {
-  background: #222222;
-  color: #ff6b6b;
-  border: 1px solid #ff6b6b;
   margin-top: 10px;
 }
 
-.delete-btn:hover {
-  background: #301515;
+.routine-item strong {
+  color: #fff;
+  font-size: 16px;
 }
 
-/* Voice Setting */
-.voice-setting {
-  background: #080808;
-  border: 1px solid #333333;
-  border-radius: 12px;
-  padding: 14px;
+.routine-item small {
+  display: block;
+  color: #aaa;
+  margin-top: 5px;
+}
+
+/* Delete button */
+.delete-btn {
+  background: #222;
+  color: #ff5555;
+  border: 1px solid #444;
+  margin-top: 10px;
+}
+
+/* Next task */
+#nextTask {
+  color: #d4af37;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+/* Saved person */
+#savedPerson {
+  color: #d4af37;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+/* Voice section */
+.voice-info {
+  color: #aaa;
+  font-size: 13px;
+  line-height: 1.5;
+  margin-bottom: 10px;
 }
 
 /* Footer */
 footer {
   text-align: center;
-  color: #777777;
+  color: #666;
   font-size: 12px;
   padding: 20px 0;
 }
 
-footer strong {
-  color: #d4af37;
-}
-
 /* Mobile */
 @media (max-width: 480px) {
-
   .app {
     padding: 12px;
   }
 
   header h1 {
-    font-size: 25px;
+    font-size: 26px;
   }
 
   .card {
     padding: 15px;
-  }
-
-  button,
-  input,
-  select {
-    font-size: 14px;
   }
 }
