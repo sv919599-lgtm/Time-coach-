@@ -2,55 +2,95 @@
 <html lang="hi">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Time Coach</title>
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <meta name="theme-color" content="#000000">
+
+  <meta name="description"
+        content="Time Coach - Daily Routine Reminder by SV Group">
+
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" href="icon.png">
 
   <link rel="stylesheet" href="style.css">
+
+  <title>Time Coach - SV Group</title>
 </head>
 
 <body>
 
-  <div class="app">
+  <header class="topbar">
+    <div class="logo">SV</div>
 
-    <!-- HEADER -->
-    <header class="header">
-      <h1>⏱️ TIME COACH</h1>
-      <p>SV Group</p>
-    </header>
+    <div>
+      <h1>⏱️ Time Coach</h1>
+      <p>SV Group • Daily Routine</p>
+    </div>
+  </header>
 
+
+  <main class="container">
 
     <!-- PERSON -->
     <section class="card">
-
       <h2>👤 Person</h2>
 
-      <div class="person-row">
+      <input
+        type="text"
+        id="personName"
+        placeholder="नाम लिखें"
+        autocomplete="off"
+      >
 
-        <input
-          type="text"
-          id="personName"
-          placeholder="अपना नाम लिखें"
-        >
+      <button id="savePersonBtn" class="primary">
+        💾 Save Person
+      </button>
 
-        <button onclick="savePerson()">
-          💾 Save
-        </button>
+      <div id="personMessage" class="message"></div>
+    </section>
 
-      </div>
 
-      <p id="savedPerson"></p>
+    <!-- ADD ROUTINE -->
+    <section class="card">
+
+      <h2>➕ Daily Routine</h2>
+
+      <label>काम / Task</label>
+
+      <input
+        type="text"
+        id="taskName"
+        placeholder="जैसे Coaching"
+        autocomplete="off"
+      >
+
+
+      <label>समय</label>
+
+      <input
+        type="time"
+        id="taskTime"
+      >
+
+
+      <button id="addRoutineBtn" class="primary">
+        ➕ Add Routine
+      </button>
 
     </section>
 
 
     <!-- NEXT TASK -->
-    <section class="card next-card">
+    <section class="next-card">
 
-      <h2>🔔 NEXT TASK</h2>
+      <div class="next-title">
+        🔔 Next Task
+      </div>
 
       <div id="nextTask">
-        No task scheduled
+        अभी कोई routine नहीं है
       </div>
 
     </section>
@@ -59,84 +99,60 @@
     <!-- TODAY ROUTINE -->
     <section class="card">
 
-      <div class="routine-title">
+      <div class="section-heading">
+        <h2>📅 Today's Routine</h2>
 
-        <h2>📅 TODAY'S ROUTINE</h2>
-
-        <button onclick="showAddRoutine()">
-          ➕ Add
+        <button id="notificationBtn" class="small-btn">
+          🔔 Notification
         </button>
-
       </div>
 
       <div id="routineList">
-        <p class="empty">
-          No routine added yet
-        </p>
+        <div class="empty">
+          अभी कोई routine नहीं है
+        </div>
       </div>
 
     </section>
 
 
-    <!-- ADD ROUTINE -->
-    <section
-      class="card add-card"
-      id="addRoutineCard"
-      style="display:none;"
-    >
-
-      <h2>➕ Add Routine</h2>
-
-      <input
-        type="text"
-        id="routineName"
-        placeholder="काम का नाम"
-      >
-
-      <label>समय</label>
-
-      <input
-        type="time"
-        id="routineTime"
-      >
-
-      <div class="button-row">
-
-        <button onclick="saveRoutine()">
-          💾 Save Routine
-        </button>
-
-        <button
-          class="cancel"
-          onclick="hideAddRoutine()"
-        >
-          ❌ Cancel
-        </button>
-
-      </div>
-
-    </section>
-
-
-    <!-- REMINDER -->
+    <!-- TEST VOICE -->
     <section class="card">
 
-      <button
-        class="reminder-btn"
-        onclick="enableNotifications()"
-      >
-        🔔 Enable Reminder
+      <h2>🔊 Voice Test</h2>
+
+      <button id="testVoiceBtn" class="secondary">
+        ▶️ Voice Test
       </button>
+
+      <p class="hint">
+        Voice reminder के लिए phone की आवाज़ ON रखें।
+      </p>
 
     </section>
 
-  </div>
-<button
-  class="reminder-btn"
-  onclick="testVoice()"
->
-  🔊 Test Voice
-</button>
+
+    <!-- STATUS -->
+    <section class="status-card">
+
+      <div>
+        <span class="status-dot"></span>
+        <span id="statusText">Time Coach चालू है</span>
+      </div>
+
+      <div id="currentTime">
+        --:--
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <footer>
+    <p>© 2026 SV Group</p>
+  </footer>
+
 
   <script src="script.js"></script>
 
