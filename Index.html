@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Time Coach</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="app">
+
+    <!-- HEADER -->
+    <header class="header">
+      <h1>⏱️ TIME COACH</h1>
+      <p>SV Group</p>
+    </header>
+
+
+    <!-- PERSON -->
+    <section class="card">
+
+      <h2>👤 Person</h2>
+
+      <div class="person-row">
+
+        <input
+          type="text"
+          id="personName"
+          placeholder="अपना नाम लिखें"
+        >
+
+        <button onclick="savePerson()">
+          💾 Save
+        </button>
+
+      </div>
+
+      <p id="savedPerson"></p>
+
+    </section>
+
+
+    <!-- NEXT TASK -->
+    <section class="card next-card">
+
+      <h2>🔔 NEXT TASK</h2>
+
+      <div id="nextTask">
+        No task scheduled
+      </div>
+
+    </section>
+
+
+    <!-- TODAY ROUTINE -->
+    <section class="card">
+
+      <div class="routine-title">
+
+        <h2>📅 TODAY'S ROUTINE</h2>
+
+        <button onclick="showAddRoutine()">
+          ➕ Add
+        </button>
+
+      </div>
+
+      <div id="routineList">
+        <p class="empty">
+          No routine added yet
+        </p>
+      </div>
+
+    </section>
+
+
+    <!-- ADD ROUTINE -->
+    <section
+      class="card add-card"
+      id="addRoutineCard"
+      style="display:none;"
+    >
+
+      <h2>➕ Add Routine</h2>
+
+      <input
+        type="text"
+        id="routineName"
+        placeholder="काम का नाम"
+      >
+
+      <label>समय</label>
+
+      <input
+        type="time"
+        id="routineTime"
+      >
+
+      <div class="button-row">
+
+        <button onclick="saveRoutine()">
+          💾 Save Routine
+        </button>
+
+        <button
+          class="cancel"
+          onclick="hideAddRoutine()"
+        >
+          ❌ Cancel
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- REMINDER -->
+    <section class="card">
+
+      <button
+        class="reminder-btn"
+        onclick="enableNotifications()"
+      >
+        🔔 Enable Reminder
+      </button>
+
+    </section>
+
+  </div>
+<button
+  class="reminder-btn"
+  onclick="testVoice()"
+>
+  🔊 Test Voice
+</button>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
