@@ -2,29 +2,43 @@
 <html lang="hi">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
   <title>Time Coach - SV Group</title>
+
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+  <!-- HEADER -->
   <header class="header">
+
     <div class="logo">
-  <img src="icon.png" alt="SV Group Logo">
+      <img
+        src="icon.png"
+        alt="SV Group Logo"
+      >
     </div>
 
-    <div>
+    <div class="header-text">
       <h1>⏱️ Time Coach</h1>
       <p>SV Group • Daily Routine</p>
     </div>
+
   </header>
 
 
+  <!-- MAIN -->
   <main class="container">
 
     <!-- PERSON -->
     <section class="card">
+
       <h2>👤 Person</h2>
 
       <input
@@ -33,20 +47,29 @@
         placeholder="नाम लिखें"
       >
 
-      <button id="savePersonBtn" class="gold-btn">
+      <button
+        id="savePersonBtn"
+        class="gold-btn"
+      >
         💾 Save Person
       </button>
 
-      <p id="personMessage" class="message"></p>
+      <p
+        id="personMessage"
+        class="message"
+      ></p>
+
     </section>
 
 
-    <!-- ADD ROUTINE -->
+    <!-- DAILY ROUTINE -->
     <section class="card">
 
       <h2>➕ Daily Routine</h2>
 
-      <label>Task / काम</label>
+      <label for="taskName">
+        Task / काम
+      </label>
 
       <input
         id="taskName"
@@ -54,14 +77,21 @@
         placeholder="जैसे Coaching"
       >
 
-      <label>Time / समय</label>
+
+      <label for="taskTime">
+        Time / समय
+      </label>
 
       <input
         id="taskTime"
         type="time"
       >
 
-      <button id="addRoutineBtn" class="gold-btn">
+
+      <button
+        id="addRoutineBtn"
+        class="gold-btn"
+      >
         ➕ Add Routine
       </button>
 
@@ -82,7 +112,7 @@
     </section>
 
 
-    <!-- ROUTINES -->
+    <!-- TODAY'S ROUTINE -->
     <section class="card">
 
       <h2>📅 Today's Routine</h2>
@@ -101,7 +131,10 @@
 
       <h2>🔊 Voice</h2>
 
-      <button id="testVoiceBtn" class="dark-btn">
+      <button
+        id="testVoiceBtn"
+        class="dark-btn"
+      >
         ▶️ Voice Test
       </button>
 
@@ -112,7 +145,7 @@
     </section>
 
 
-    <!-- CLOCK -->
+    <!-- STATUS -->
     <section class="status-card">
 
       <div>
@@ -121,7 +154,7 @@
       </div>
 
       <strong id="currentTime">
-        --:--
+        --:--:--
       </strong>
 
     </section>
@@ -129,11 +162,13 @@
   </main>
 
 
+  <!-- FOOTER -->
   <footer>
-    © 2026 SV Group
+    © 2026 SV Group • Time Coach
   </footer>
 
 
+  <!-- JAVASCRIPT -->
   <script src="script.js"></script>
 
 </body>
