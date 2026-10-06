@@ -1,0 +1,232 @@
+/* ================================
+   TIME COACH
+   SIMPLE DAILY ROUTINE
+================================ */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  color: #222;
+}
+
+.app {
+  width: 100%;
+  max-width: 520px;
+  margin: auto;
+  padding: 15px;
+}
+
+
+/* HEADER */
+
+.header {
+  background: #111;
+  color: white;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.header h1 {
+  font-size: 26px;
+}
+
+.header p {
+  margin-top: 5px;
+  color: #d4af37;
+  font-weight: bold;
+}
+
+
+/* CARD */
+
+.card {
+  background: white;
+  border-radius: 15px;
+  padding: 18px;
+  margin-bottom: 15px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.card h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+
+/* PERSON */
+
+.person-row {
+  display: flex;
+  gap: 8px;
+}
+
+input {
+  width: 100%;
+  padding: 13px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  outline: none;
+}
+
+input:focus {
+  border-color: #d4af37;
+}
+
+button {
+  border: none;
+  border-radius: 10px;
+  padding: 12px 15px;
+  background: #111;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+#savedPerson {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #444;
+}
+
+
+/* NEXT TASK */
+
+.next-card {
+  border-left: 5px solid #d4af37;
+}
+
+#nextTask {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px 0;
+}
+
+
+/* ROUTINE TITLE */
+
+.routine-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.routine-title h2 {
+  margin-bottom: 0;
+}
+
+
+/* ROUTINE ITEM */
+
+.routine-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  padding: 14px;
+  margin-top: 10px;
+
+  background: #f7f7f7;
+  border-radius: 12px;
+
+  border-left: 4px solid #d4af37;
+}
+
+.routine-info {
+  flex: 1;
+}
+
+.routine-name {
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.routine-time {
+  margin-top: 4px;
+  color: #555;
+}
+
+.delete-btn {
+  background: #c62828;
+  padding: 9px 11px;
+  font-size: 13px;
+}
+
+
+/* EMPTY */
+
+.empty {
+  color: #777;
+  padding: 10px 0;
+}
+
+
+/* ADD ROUTINE */
+
+.add-card label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 7px;
+  font-weight: bold;
+}
+
+.add-card input {
+  margin-bottom: 5px;
+}
+
+.button-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.button-row button {
+  flex: 1;
+}
+
+.cancel {
+  background: #777;
+}
+
+
+/* REMINDER */
+
+.reminder-btn {
+  width: 100%;
+  background: #d4af37;
+  color: #111;
+  font-size: 16px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 400px) {
+
+  .person-row {
+    flex-direction: column;
+  }
+
+  .routine-title {
+    gap: 10px;
+  }
+
+  .routine-title h2 {
+    font-size: 18px;
+  }
+
+}
