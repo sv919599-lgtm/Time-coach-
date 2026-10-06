@@ -1,26 +1,30 @@
 * {
   box-sizing: border-box;
+}
+
+html,
+body {
   margin: 0;
   padding: 0;
+  font-family: Arial, sans-serif;
+  background: #080808;
+  color: #ffffff;
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background: #0b0b0b;
-  color: #ffffff;
   min-height: 100vh;
 }
 
-.topbar {
-  background: #000000;
-  border-bottom: 2px solid #d4af37;
-  padding: 18px 16px;
+
+/* HEADER */
+
+.header {
   display: flex;
   align-items: center;
   gap: 14px;
-  position: sticky;
-  top: 0;
-  z-index: 10;
+  padding: 18px 16px;
+  background: #000000;
+  border-bottom: 2px solid #d4af37;
 }
 
 .logo {
@@ -28,24 +32,30 @@ body {
   height: 52px;
   border: 2px solid #d4af37;
   border-radius: 14px;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   color: #d4af37;
   font-size: 22px;
   font-weight: bold;
 }
 
-.topbar h1 {
-  font-size: 24px;
+.header h1 {
+  margin: 0 0 4px;
   color: #d4af37;
-  margin-bottom: 4px;
+  font-size: 24px;
 }
 
-.topbar p {
-  color: #bbbbbb;
+.header p {
+  margin: 0;
+  color: #999999;
   font-size: 13px;
 }
+
+
+/* MAIN */
 
 .container {
   width: 100%;
@@ -53,6 +63,9 @@ body {
   margin: auto;
   padding: 16px;
 }
+
+
+/* CARD */
 
 .card,
 .next-card,
@@ -65,25 +78,31 @@ body {
 }
 
 .card h2 {
+  margin: 0 0 16px;
   color: #d4af37;
   font-size: 19px;
-  margin-bottom: 16px;
 }
+
+
+/* INPUT */
 
 label {
   display: block;
-  color: #cccccc;
-  font-size: 14px;
   margin: 12px 0 7px;
+  color: #bbbbbb;
+  font-size: 14px;
 }
 
 input {
   width: 100%;
-  background: #090909;
-  color: white;
+  padding: 14px;
+
+  background: #080808;
+  color: #ffffff;
+
   border: 1px solid #444444;
   border-radius: 10px;
-  padding: 14px;
+
   font-size: 16px;
   outline: none;
 }
@@ -92,91 +111,75 @@ input:focus {
   border-color: #d4af37;
 }
 
+
+/* BUTTONS */
+
 button {
   width: 100%;
-  border: none;
-  border-radius: 10px;
   padding: 14px;
+  margin-top: 12px;
+
+  border-radius: 10px;
   font-size: 16px;
   font-weight: bold;
-  margin-top: 12px;
+
   cursor: pointer;
 }
 
-.primary {
+.gold-btn {
   background: #d4af37;
   color: #000000;
+  border: none;
 }
 
-.secondary {
+.dark-btn {
   background: #222222;
   color: #d4af37;
   border: 1px solid #d4af37;
 }
 
-.small-btn {
-  width: auto;
-  margin: 0;
-  padding: 9px 12px;
-  font-size: 13px;
-  background: #222222;
-  color: #d4af37;
-  border: 1px solid #555555;
-}
+
+/* MESSAGE */
 
 .message {
   color: #d4af37;
-  margin-top: 10px;
   font-size: 14px;
+  margin: 10px 0 0;
 }
+
+
+/* NEXT TASK */
 
 .next-card {
   border-color: #d4af37;
-  background: linear-gradient(
-    145deg,
-    #171717,
-    #0c0c0c
-  );
 }
 
-.next-title {
+.next-label {
   color: #d4af37;
   font-size: 14px;
   margin-bottom: 8px;
 }
 
 #nextTask {
-  font-size: 21px;
+  font-size: 20px;
   font-weight: bold;
 }
 
-.section-heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-}
 
-.section-heading h2 {
-  margin-bottom: 0;
-}
-
-#routineList {
-  margin-top: 16px;
-}
+/* ROUTINE */
 
 .routine {
-  background: #0d0d0d;
+  background: #090909;
   border: 1px solid #333333;
   border-radius: 12px;
   padding: 14px;
   margin-bottom: 10px;
 }
 
-.routine-top {
+.routine-row {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   gap: 10px;
 }
 
@@ -193,58 +196,72 @@ button {
 
 .delete-btn {
   width: auto;
-  background: #2a1111;
-  color: #ff7777;
-  border: 1px solid #662222;
-  padding: 8px 12px;
   margin-top: 10px;
+  padding: 8px 12px;
+
+  background: #2a1010;
+  color: #ff7777;
+
+  border: 1px solid #662222;
   font-size: 13px;
 }
 
 .empty {
-  text-align: center;
-  color: #888888;
   padding: 20px 5px;
+  text-align: center;
+  color: #777777;
 }
 
-.hint {
-  color: #888888;
-  font-size: 13px;
-  margin-top: 10px;
-  line-height: 1.5;
-}
+
+/* STATUS */
 
 .status-card {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  color: #cccccc;
+  justify-content: space-between;
 }
 
-.status-dot {
+.green-dot {
   display: inline-block;
+
   width: 9px;
   height: 9px;
+
+  margin-right: 7px;
+
   background: #32cd32;
   border-radius: 50%;
-  margin-right: 7px;
 }
 
 #currentTime {
   color: #d4af37;
-  font-weight: bold;
 }
 
+
+/* HINT */
+
+.hint {
+  color: #777777;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+
+/* FOOTER */
+
 footer {
-  text-align: center;
-  color: #666666;
   padding: 20px;
+  text-align: center;
+  color: #555555;
   font-size: 12px;
 }
 
+
+/* MOBILE */
+
 @media (max-width: 400px) {
 
-  .topbar h1 {
+  .header h1 {
     font-size: 21px;
   }
 
@@ -258,4 +275,4 @@ footer {
     padding: 15px;
   }
 
-}
+  }
