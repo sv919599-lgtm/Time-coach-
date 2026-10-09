@@ -1,7 +1,7 @@
-/* =====================================
-   SV GROUP - TIME COACH
-   GOLD + BLACK PROFESSIONAL DESIGN
-===================================== */
+/* =========================================
+   TIME COACH - SV GROUP
+   PROFESSIONAL BLACK & GOLD UI
+========================================= */
 
 * {
   box-sizing: border-box;
@@ -11,120 +11,126 @@
 
 :root {
   --gold: #ffd45a;
-  --gold-dark: #d4a52d;
+  --gold-dark: #d4af37;
   --black: #050505;
-  --card: #0d1014;
-  --border: #292e36;
+  --card: #101317;
+  --border: #292d33;
   --white: #f7f7f7;
-  --muted: #aeb3bd;
+  --muted: #aeb0b8;
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: Arial, "Noto Sans Devanagari", sans-serif;
   background: var(--black);
   color: var(--white);
   min-height: 100vh;
-  padding: 20px 12px;
 }
 
 .app {
   width: 100%;
-  max-width: 1000px;
+  max-width: 1050px;
   margin: auto;
+  padding: 22px 18px;
 }
 
 /* HEADER */
 
 header {
-  min-height: 165px;
-  padding: 20px;
-  border: 2px solid var(--gold-dark);
-  border-radius: 20px;
-  background: linear-gradient(120deg, #090909, #171208);
+  min-height: 170px;
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 22px;
+  padding: 20px 28px;
+  border: 2px solid var(--gold-dark);
+  border-radius: 22px;
   margin-bottom: 28px;
-  box-shadow: 0 0 12px #d4af3720;
+  background: linear-gradient(110deg, #080806, #151207);
+  box-shadow: 0 0 14px rgba(212, 175, 55, 0.08);
 }
 
 .logo {
   flex-shrink: 0;
-  display: flex;
-  align-items: center;
 }
 
 .logo img {
-  width: 76px !important;
-  height: 76px !important;
+  width: 85px !important;
+  height: 85px !important;
   object-fit: contain;
+  margin: 0 !important;
 }
 
 header h1 {
   color: var(--gold);
   font-family: Georgia, serif;
-  font-size: clamp(27px, 5vw, 44px);
-  line-height: 1.2;
+  font-size: clamp(27px, 5vw, 48px);
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 4px;
 }
 
 header p {
   color: var(--gold);
   font-family: Georgia, serif;
-  font-size: 21px;
-  margin-top: 4px;
+  font-size: clamp(15px, 3vw, 24px);
 }
 
 /* CARDS */
 
 .card {
-  background: linear-gradient(145deg, #101318, #090b0e);
-  border: 1.5px solid var(--border);
-  border-radius: 19px;
+  background: linear-gradient(135deg, #111418, #0c0e11);
+  border: 2px solid var(--border);
+  border-radius: 20px;
   padding: 22px;
   margin-bottom: 20px;
-  box-shadow: 0 5px 16px #00000055;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
 }
 
 .card h2 {
-  color: var(--gold);
-  font-family: Georgia, serif;
-  font-size: clamp(24px, 4vw, 34px);
-  margin-bottom: 20px;
   display: flex;
   align-items: center;
   gap: 12px;
+  color: var(--gold);
+  font-family: Georgia, "Noto Serif Devanagari", serif;
+  font-size: clamp(22px, 4vw, 34px);
+  font-weight: 800;
+  margin-bottom: 20px;
 }
 
-/* LABELS AND INPUTS */
+/* LABELS */
 
 label {
   display: block;
   color: var(--white);
-  font-size: 19px;
+  font-size: 16px;
   font-weight: 600;
-  margin: 12px 0 9px;
+  margin-bottom: 9px;
 }
 
-input {
+/* INPUTS */
+
+input,
+select {
+  display: block;
   width: 100%;
   min-width: 0;
-  min-height: 58px;
-  padding: 13px 16px;
-  background: #090a0c;
-  color: white;
-  border: 2px solid var(--gold-dark);
-  border-radius: 12px;
-  font-size: 19px;
+  padding: 15px;
+  background: #070809;
+  color: #fff;
+  border: 2px solid #b99b36;
+  border-radius: 13px;
   outline: none;
+  margin-bottom: 16px;
+  font-size: 17px;
 }
 
 input::placeholder {
-  color: #9da1aa;
+  color: #999da5;
 }
 
-input:focus {
-  border-color: #ffe68a;
-  box-shadow: 0 0 9px #ffd45a35;
+input:focus,
+select:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 8px rgba(255, 212, 90, 0.15);
 }
 
 input[type="time"] {
@@ -134,67 +140,59 @@ input[type="time"] {
 /* BUTTONS */
 
 button {
-  min-height: 56px;
-  padding: 13px 20px;
-  background: linear-gradient(135deg, #ffe78a, #e7a927);
+  width: 100%;
+  min-height: 52px;
+  padding: 14px 18px;
+  border: 1px solid var(--gold);
+  border-radius: 14px;
+  background: linear-gradient(135deg, #ffe58a, #e6ad28);
   color: #080808;
-  border: 0;
-  border-radius: 13px;
-  font-size: 18px;
-  font-weight: 700;
+  font-size: 17px;
+  font-weight: 800;
   cursor: pointer;
   transition: transform 0.15s, filter 0.15s;
 }
 
 button:active {
-  transform: scale(0.97);
+  transform: scale(0.98);
   filter: brightness(0.9);
 }
 
-button.secondary-btn {
-  width: 100%;
-  background: linear-gradient(120deg, #161208, #211800);
-  color: var(--gold);
-  border: 2px solid var(--gold-dark);
-  font-size: 25px;
-  min-height: 78px;
+.secondary-btn {
+  background: linear-gradient(135deg, #ffe58a, #e6ad28);
+  color: #080808;
 }
 
-/* PERSON */
+/* PERSON SECTION */
 
 #personName {
   margin-bottom: 14px;
 }
 
-#personMessage,
+#personMessage {
+  color: #46d98b;
+  margin-top: 10px;
+}
+
 #savedPerson {
-  margin-top: 12px;
   color: var(--gold);
   font-size: 16px;
+  font-weight: 700;
+  margin-top: 10px;
 }
 
-/* ROUTINE */
-
-#taskName,
-#taskTime {
-  margin-bottom: 14px;
-}
-
-#addRoutineBtn,
-#savePersonBtn {
-  width: 100%;
-  margin-top: 4px;
-}
+/* NEXT TASK */
 
 #nextTask {
-  min-height: 80px;
-  border-top: 1px solid var(--border);
-  padding: 24px 10px;
+  color: #d0d1d5;
   text-align: center;
-  color: var(--muted);
-  font-size: 22px;
-  line-height: 1.6;
+  font-size: 20px;
+  line-height: 1.7;
+  padding: 18px 8px;
+  overflow-wrap: anywhere;
 }
+
+/* ROUTINE LIST */
 
 #routineList {
   display: grid;
@@ -204,28 +202,65 @@ button.secondary-btn {
 .empty {
   color: var(--muted);
   text-align: center;
-  padding: 20px 8px;
+  padding: 18px 6px;
+  font-size: 17px;
+}
+
+.routine-item {
+  background: #080a0c;
+  border: 1px solid #34383e;
+  border-left: 5px solid var(--gold);
+  border-radius: 13px;
+  padding: 16px;
+  margin-top: 8px;
+  overflow-wrap: anywhere;
+}
+
+.routine-item strong {
+  color: var(--gold);
   font-size: 18px;
 }
 
-/* Existing routine items */
+.routine-item small {
+  display: block;
+  color: #b6b6b6;
+  font-size: 14px;
+  margin-top: 8px;
+}
 
-#routineList > div {
-  overflow-wrap: anywhere;
+.delete-btn {
+  background: #251416;
+  color: #ff7777;
+  border: 1px solid #693737;
+  margin-top: 12px;
+}
+
+/* VOICE SECTION */
+
+.voice-setting {
+  width: 100%;
+}
+
+.voice-info {
+  color: #aaa;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 12px;
 }
 
 /* STATUS */
 
 .green-dot {
-  box-shadow: 0 0 8px #39d35370;
+  box-shadow: 0 0 8px rgba(57, 211, 83, 0.35);
 }
 
 #currentTime {
   display: inline-block;
-  border: 1.5px solid var(--gold-dark);
-  border-radius: 10px;
   padding: 10px 14px;
-  font-size: 19px;
+  border: 1px solid var(--gold-dark);
+  border-radius: 12px;
+  color: var(--gold) !important;
+  font-size: clamp(15px, 3vw, 23px);
   white-space: nowrap;
 }
 
@@ -233,9 +268,10 @@ button.secondary-btn {
 
 footer {
   text-align: center;
-  color: #c5c5c5;
-  padding: 22px 8px;
-  font-size: 17px;
+  color: #b3b3b3;
+  font-family: Georgia, serif;
+  font-size: 16px;
+  padding: 20px 8px 10px;
   line-height: 1.8;
 }
 
@@ -243,24 +279,24 @@ footer strong {
   color: var(--gold);
 }
 
-/* MOBILE RESPONSIVE */
+/* MOBILE */
 
 @media (max-width: 600px) {
-  body {
-    padding: 12px 9px;
+  .app {
+    padding: 12px;
   }
 
   header {
     min-height: 125px;
-    padding: 15px 12px;
     gap: 12px;
-    border-radius: 16px;
+    padding: 16px 12px;
+    border-radius: 17px;
     margin-bottom: 18px;
   }
 
   .logo img {
-    width: 54px !important;
-    height: 54px !important;
+    width: 58px !important;
+    height: 58px !important;
   }
 
   header h1 {
@@ -268,44 +304,61 @@ footer strong {
   }
 
   header p {
-    font-size: 16px;
+    font-size: 15px;
   }
 
   .card {
-    padding: 17px 14px;
-    margin-bottom: 15px;
+    padding: 16px;
     border-radius: 16px;
+    margin-bottom: 15px;
   }
 
   .card h2 {
-    font-size: 25px;
+    font-size: 24px;
     margin-bottom: 16px;
   }
 
-  label {
-    font-size: 17px;
-  }
-
-  input {
-    min-height: 54px;
-    font-size: 17px;
+  input,
+  select {
+    padding: 13px;
+    font-size: 16px;
   }
 
   button {
-    min-height: 54px;
-    font-size: 17px;
+    min-height: 49px;
+    padding: 12px;
+    font-size: 16px;
   }
 
   #nextTask {
-    font-size: 19px;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 360px) {
+  .app {
+    padding: 8px;
   }
 
-  #currentTime {
-    font-size: 15px;
-    padding: 9px 10px;
+  header {
+    gap: 8px;
+    padding: 12px 8px;
   }
 
-  footer {
-    font-size: 15px;
+  .logo img {
+    width: 48px !important;
+    height: 48px !important;
   }
-   }
+
+  header h1 {
+    font-size: 23px;
+  }
+
+  .card {
+    padding: 12px;
+  }
+
+  .card h2 {
+    font-size: 21px;
+  }
+}
