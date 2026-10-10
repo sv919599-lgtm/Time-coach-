@@ -28,9 +28,9 @@ scroll-behavior: smooth;
 body {
 font-family: Arial, sans-serif;
 background:
-radial-gradient(ellipse at top, #24200f 0%, transparent 42%),
-var(--black);
-color: var(--white);
+radial-gradient(ellipse at top, #3b3010 0%, transparent 48%),
+#050505;
+color: #ffffff;
 min-height: 100vh;
 padding: 16px;
 line-height: 1.5;
