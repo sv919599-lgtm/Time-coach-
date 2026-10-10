@@ -1,139 +1,279 @@
-/* TIME COACH - SV GROUP */
+/* =========================================
+TIME COACH - SV GROUP
+PREMIUM BLACK & GOLD DESIGN
+========================================= */
+
+:root {
+--gold: #d4af37;
+--gold-light: #ffe58a;
+--black: #050505;
+--card: #111111;
+--card-light: #191919;
+--border: #343434;
+--white: #ffffff;
+--muted: #aaaaaa;
+}
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  }
+
+html {
+scroll-behavior: smooth;
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background: #050505;
-  color: #ffffff;
-  min-height: 100vh;
-  padding: 18px;
+font-family: Arial, sans-serif;
+background:
+radial-gradient(ellipse at top, #24200f 0%, transparent 42%),
+var(--black);
+color: var(--white);
+min-height: 100vh;
+padding: 16px;
+line-height: 1.5;
 }
 
 .app {
-  width: 100%;
-  max-width: 520px;
-  margin: 0 auto;
+width: 100%;
+max-width: 520px;
+margin: 0 auto;
 }
 
+/* HEADER */
+
 header {
-  text-align: center;
-  padding: 24px 12px;
-  border: 1px solid #d4af37;
-  border-radius: 18px;
-  background: linear-gradient(145deg, #171717, #050505);
-  margin-bottom: 22px;
-  box-shadow: 0 0 18px rgba(212, 175, 55, 0.12);
+position: relative;
+overflow: hidden;
+text-align: center;
+padding: 28px 16px;
+border: 1px solid var(--gold);
+border-radius: 22px;
+background: linear-gradient(145deg, #211d10, #090909 70%);
+margin-bottom: 24px;
+box-shadow: 0 8px 28px rgba(212, 175, 55, 0.12);
+}
+
+header::before {
+content: "";
+display: block;
+width: 65px;
+height: 4px;
+border-radius: 10px;
+background: var(--gold);
+margin: 0 auto 16px;
 }
 
 header h1 {
-  color: #d4af37;
-  font-size: 28px;
-  margin-bottom: 8px;
+color: var(--gold-light);
+font-size: 29px;
+font-weight: 800;
+letter-spacing: 1px;
+margin-bottom: 7px;
 }
 
 header p {
-  color: #cccccc;
-  font-size: 14px;
+color: #d0d0d0;
+font-size: 14px;
+letter-spacing: 0.5px;
 }
 
+/* HEADINGS */
+
 h2 {
-  color: #d4af37;
-  font-size: 19px;
-  margin-bottom: 14px;
+color: var(--gold-light);
+font-size: 20px;
+font-weight: 700;
+margin-bottom: 16px;
 }
+
+h3 {
+font-size: 16px;
+}
+
+/* SECTIONS AND CARDS */
 
 section,
 .card {
-  background: #111111;
-  border: 1px solid #333333;
-  border-radius: 16px;
-  padding: 18px;
-  margin-bottom: 18px;
+background: linear-gradient(145deg, #171717, #0d0d0d);
+border: 1px solid var(--border);
+border-radius: 18px;
+padding: 19px;
+margin-bottom: 19px;
+box-shadow: 0 7px 20px rgba(0, 0, 0, 0.22);
 }
 
-label {
-  display: block;
-  color: #dddddd;
-  font-size: 14px;
-  margin: 12px 0 7px;
+section:focus-within,
+.card:focus-within {
+border-color: rgba(212, 175, 55, 0.65);
 }
+
+/* LABELS */
+
+label {
+display: block;
+color: #e4e4e4;
+font-size: 14px;
+font-weight: 600;
+margin: 14px 0 7px;
+}
+
+/* INPUTS */
 
 input,
 select,
 textarea {
-  display: block;
-  width: 100%;
-  padding: 13px;
-  background: #080808;
-  color: #ffffff;
-  border: 1px solid #555555;
-  border-radius: 10px;
-  font-size: 16px;
-  outline: none;
+display: block;
+width: 100%;
+min-height: 48px;
+padding: 13px 14px;
+background: #080808;
+color: var(--white);
+border: 1px solid #414141;
+border-radius: 12px;
+font-family: inherit;
+font-size: 16px;
+outline: none;
+transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 input:focus,
 select:focus,
 textarea:focus {
-  border-color: #d4af37;
+border-color: var(--gold);
+box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.10);
 }
 
+input::placeholder,
+textarea::placeholder {
+color: #777777;
+}
+
+select option {
+background: #111111;
+color: #ffffff;
+}
+
+textarea {
+resize: vertical;
+min-height: 90px;
+}
+
+/* BUTTONS */
+
 button {
-  width: 100%;
-  padding: 13px;
-  margin-top: 12px;
-  background: #d4af37;
-  color: #050505;
-  border: none;
-  border-radius: 10px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
+display: block;
+width: 100%;
+min-height: 47px;
+padding: 13px 16px;
+margin-top: 13px;
+background: linear-gradient(135deg, #ffe58a, #d4af37 65%, #b18a20);
+color: #080808;
+border: 1px solid #e5c65c;
+border-radius: 12px;
+font-family: inherit;
+font-size: 15px;
+font-weight: 800;
+cursor: pointer;
+transition: transform 0.15s, filter 0.15s;
 }
 
 button:active {
-  transform: scale(0.98);
+transform: scale(0.97);
+filter: brightness(0.9);
 }
 
 button.secondary {
-  background: #222222;
-  color: #d4af37;
-  border: 1px solid #d4af37;
+background: #171717;
+color: var(--gold-light);
+border: 1px solid var(--gold);
 }
 
+button:focus-visible {
+outline: 2px solid var(--gold-light);
+outline-offset: 3px;
+}
+
+/* TASK / ROUTINE CARDS */
+
 .task-item {
-  background: #191919;
-  border: 1px solid #383838;
-  border-radius: 12px;
-  padding: 14px;
-  margin-top: 12px;
+background: linear-gradient(145deg, #202020, #111111);
+border: 1px solid #414141;
+border-left: 4px solid var(--gold);
+border-radius: 14px;
+padding: 16px;
+margin-top: 13px;
+overflow-wrap: anywhere;
 }
 
 .task-item h3 {
-  color: #d4af37;
-  margin-bottom: 7px;
+color: var(--gold-light);
+font-size: 17px;
+margin-bottom: 8px;
 }
 
 .task-item p {
-  color: #dddddd;
-  font-size: 14px;
-  margin-top: 5px;
+color: #dddddd;
+font-size: 14px;
+margin-top: 6px;
+line-height: 1.6;
 }
+
+/* STATUS MESSAGES */
 
 .status {
-  color: #d4af37;
-  padding: 10px 0;
-  line-height: 1.6;
+color: var(--gold-light);
+padding: 12px 0;
+line-height: 1.7;
+font-size: 14px;
 }
 
+/* FOOTER */
+
 footer {
-  text-align: center;
-  color: #888888;
-  font-size: 12px;
-  padding: 18px 0;
+text-align: center;
+color: #888888;
+font-size: 12px;
+padding: 22px 8px;
+line-height: 1.8;
 }
+
+/* MOBILE DISPLAY */
+
+@media (max-width: 380px) {
+body {
+padding: 10px;
+}
+
+header {
+padding: 23px 12px;
+border-radius: 18px;
+}
+
+header h1 {
+font-size: 25px;
+}
+
+section,
+.card {
+padding: 15px;
+border-radius: 15px;
+}
+
+h2 {
+font-size: 18px;
+}
+}
+
+/* REDUCED MOTION ACCESSIBILITY */
+
+@media (prefers-reduced-motion: reduce) {
+*,
+*::before,
+*::after {
+scroll-behavior: auto !important;
+transition: none !important;
+}
+  }
