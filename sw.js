@@ -1,4 +1,4 @@
-const CACHE_NAME = "time-coach-v1";
+const CACHE_NAME = "time-coach-v2";
 
 const FILES_TO_CACHE = [
   "./",
